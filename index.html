@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Painel de Criminalidade — RS</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+<main class="page">
+<header class="hero"><div><h1>Painel de Criminalidade — Rio Grande do Sul — 2002-2026</h1><p>Casos, taxas anuais, rankings, mapas, variação, média e tendência por Estado, COREDE e município.</p></div><span id="updateInfo" class="update-pill"></span></header>
+<section class="controls">
+<label>Abrangência<select id="abrangenciaSelect"></select></label>
+<label>Localidade<select id="localidadeSelect"></select></label>
+<label>Crime/Indicador<select id="crimeSelect"></select></label>
+<label>Indicador<select id="indicadorSelect"><option value="casos">Casos</option><option value="taxa">Taxa</option></select></label>
+<label>Visualização temporal<select id="tempoSelect"><option value="anual">Ano</option><option value="mensal">Mês/Ano</option></select></label>
+<label>Ano inicial<select id="anoIniSelect"></select></label>
+<label>Ano final<select id="anoFimSelect"></select></label>
+<label>Indicador no mapa<select id="mapMetricSelect"></select></label>
+<label>Classes do mapa<select id="classeMapaSelect"><option value="quartis">Quartis</option><option value="iguais">Intervalos iguais</option></select></label>
+<button id="downloadBtn">Baixar resumo em PDF</button><button id="resetBtn" class="ghost">Limpar filtros</button>
+</section>
+<section class="cards"><article class="card"><h3>Abrangência</h3><strong id="kAbrangencia">-</strong><p id="kLocalidade">-</p></article><article class="card"><h3>Período</h3><strong id="kPeriodo">-</strong><p id="kCrime">-</p></article><article class="card"><h3>Casos no ano final</h3><strong id="kCasos">-</strong><p id="kCasosNote">-</p></article><article class="card"><h3>Taxa no ano final</h3><strong id="kTaxa">-</strong><p id="kTaxaNote">-</p></article><article class="card"><h3>Variação %</h3><strong id="kVariacao">-</strong><p id="kVariacaoNote">-</p></article><article class="card"><h3>Meta 2027</h3><strong id="kMeta">-</strong><p id="kMetaNote">-</p></article></section>
+<section class="grid">
+<article class="panel large"><h2 id="mapTitle">Mapa</h2><p id="mapDesc">O mapa usa o indicador selecionado.</p><div id="mapHelp" class="map-help"></div><div id="mapPlot" class="plot"></div></article>
+<article class="panel"><h2 id="serieTitle">Linha do tempo</h2><p id="serieDesc"></p><div id="seriePlot" class="plot"></div></article>
+<article class="panel"><h2 id="rankingTitle">Ranking</h2><p id="rankingDesc"></p><div id="rankingPlot" class="plot scrollplot"></div></article>
+<article class="panel"><h2 id="pieTitle">Distribuição dos indicadores</h2><p id="pieDesc"></p><div id="piePlot" class="plot"></div></article>
+<article class="panel"><h2 id="trendTitle">Média e tendência</h2><p id="trendDesc"></p><div id="trendPlot" class="plot"></div></article>
+<article class="panel"><h2 id="summaryTitle">Resumo</h2><p id="summaryDesc"></p><div id="summaryTable"></div></article>
+</section>
+<footer class="footnotes"><p><strong>Fontes:</strong> Indicadores Criminais, SSP/RS; DATASUS/Ministério da Saúde.</p><p>Dados ausentes não são tratados como zero. As taxas são calculadas dinamicamente conforme os denominadores disponíveis.</p></footer>
+</main><script src="assets/app.js"></script></body></html>
